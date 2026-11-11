@@ -1,0 +1,474 @@
+/* File Sidebar Styles */
+.file-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background: #1a1a1a;
+    border-right: 1px solid #333;
+    z-index: 1000;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.file-sidebar.collapsed {
+    transform: translateX(-240px);
+}
+
+.file-sidebar-header {
+    padding: 16px;
+    border-bottom: 1px solid #333;
+    background: #2a2a2a;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.file-sidebar-title {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar-toggle {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: color 0.2s ease;
+}
+
+.sidebar-toggle:hover {
+    color: #fff;
+    background: #444;
+}
+
+.file-list {
+    padding: 8px 0;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.file-item:hover {
+    background-color: #333;
+}
+
+.file-item.active {
+    background-color: #0066cc;
+}
+
+.file-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.file-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.file-name {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0 0 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-meta {
+    color: #888;
+    font-size: 11px;
+    margin: 0;
+}
+
+.file-type-badge {
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.file-type-pdf {
+    background: #ff4444;
+    color: white;
+}
+
+.file-type-txt {
+    background: #4CAF50;
+    color: white;
+}
+
+.file-type-csv {
+    background: #FF9800;
+    color: white;
+}
+
+.file-type-default {
+    background: #666;
+    color: white;
+}
+
+.no-files {
+    padding: 16px;
+    text-align: center;
+    color: #888;
+    font-size: 13px;
+}
+
+/* Adjust main content to accommodate sidebar */
+.chainlit-app {
+    margin-left: 280px;
+    transition: margin-left 0.3s ease;
+}
+
+.chainlit-app.sidebar-collapsed {
+    margin-left: 40px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .file-sidebar {
+        width: 100%;
+        transform: translateX(-100%);
+    }
+    
+    .file-sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .chainlit-app {
+        margin-left: 0;
+    }
+    
+    .mobile-sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        display: none;
+    }
+    
+    .mobile-sidebar-overlay.active {
+        display: block;
+    }
+}
+
+/* File type icons using CSS */
+.file-icon::before {
+    content: "📄";
+    font-size: 14px;
+}
+
+.file-icon.pdf::before {
+    content: "📕";
+}
+
+.file-icon.txt::before {
+    content: "📝";
+}
+
+.file-icon.csv::before {
+    content: "📊";
+}
+
+.file-icon.doc::before {
+    content: "📘";
+}
+
+.file-icon.image::before {
+    content: "🖼️";
+}
+
+/* Loading state */
+.file-list.loading {
+    opacity: 0.6;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    border-top-color: #666;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Refresh button */
+.refresh-button {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: color 0.2s ease;
+    margin-left: 8px;
+}
+
+.refresh-button:hover {
+    color: #fff;
+    background: #444;
+}
+
+.refresh-button::before {
+    content: "🔄";
+    font-size: 12px;
+}
+
+/* Scrollbar styling for webkit browsers */
+.file-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.file-sidebar::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.file-sidebar::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 3px;
+}
+
+.file-sidebar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* File Actions Styles */
+.file-actions {
+    display: flex;
+    gap: 4px;
+    margin-left: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.file-item:hover .file-actions {
+    opacity: 1;
+}
+
+.file-action-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.file-action-btn:hover {
+    background: #444;
+}
+
+.file-action-btn.query-btn:hover {
+    background: #0066cc;
+}
+
+.file-action-btn.reingest-btn:hover {
+    background: #28a745;
+}
+
+.file-action-btn.delete-btn:hover {
+    background: #dc3545;
+}
+
+.action-icon {
+    font-size: 12px;
+    line-height: 1;
+}
+
+/* File Status Styles */
+.file-status {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-indicator {
+    font-size: 10px;
+    line-height: 1;
+}
+
+.file-status[data-status="processing"] .status-indicator {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.file-status[data-status="ready"] .status-indicator {
+    color: #28a745;
+}
+
+.file-status[data-status="error"] .status-indicator {
+    color: #dc3545;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Enhanced file item layout */
+.file-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid #2a2a2a;
+    min-height: 60px;
+}
+
+.file-details {
+    flex: 1;
+    min-width: 0;
+    margin-right: 8px;
+}
+
+/* Search/Filter functionality */
+.file-search {
+    padding: 8px 16px;
+    border-bottom: 1px solid #333;
+}
+
+.file-search input {
+    width: 100%;
+    background: #333;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 6px 8px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.file-search input:focus {
+    outline: none;
+    border-color: #0066cc;
+}
+
+.file-search input::placeholder {
+    color: #888;
+}
+
+/* File categories */
+.file-category {
+    padding: 8px 16px;
+    background: #2a2a2a;
+    border-bottom: 1px solid #333;
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Drag and drop visual feedback */
+.file-sidebar.drag-over {
+    background: #1a3a1a;
+    border-color: #28a745;
+}
+
+.file-sidebar.drag-over::after {
+    content: "Drop files here to upload";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #28a745;
+    font-size: 14px;
+    font-weight: 600;
+    pointer-events: none;
+    z-index: 1001;
+}
+
+/* Context menu styles */
+.file-context-menu {
+    position: fixed;
+    background: #2a2a2a;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 4px 0;
+    min-width: 120px;
+    z-index: 1002;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.file-context-menu-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #fff;
+    transition: background-color 0.2s ease;
+}
+
+.file-context-menu-item:hover {
+    background: #444;
+}
+
+.file-context-menu-item.danger:hover {
+    background: #dc3545;
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: absolute;
+    background: #333;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    z-index: 1003;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.tooltip.show {
+    opacity: 1;
+}

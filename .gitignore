@@ -1,0 +1,12 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+# Runtime data: uploaded files, their metadata and the FAISS index
+uploads/
+files.db
+vector_index/
+# Google service-account credentials
+*.json
+!.chainlit/translations/*.json
+.files/

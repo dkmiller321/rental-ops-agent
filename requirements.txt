@@ -1,0 +1,16 @@
+chainlit
+langchain
+langchain-openai
+langchain-community
+langchain-text-splitters
+faiss-cpu
+sqlalchemy
+python-multipart
+python-dotenv
+google-api-python-client
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+unstructured
+pypdf
+pandas
